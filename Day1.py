@@ -41,10 +41,38 @@
 # In case the Elves get hungry and need extra snacks, they need to know which Elf to ask: they'd like to know how many Calories are being carried by the Elf carrying the most Calories. In the example above, this is 24000 (carried by the fourth Elf).
 
 # Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
+
+# --- Part Two ---
+
+# By the time you calculate the answer to the Elves' question, t
+# hey've already realized that the Elf carrying the most Calories of food might eventually run out of snacks.
+
+# To avoid this unacceptable situation, 
+# the Elves would instead like to know the total Calories carried by the top three Elves carrying the most Calories. 
+# That way, even if one of those Elves runs out of snacks, they still have two backups.
+
+# In the example above, the top three Elves are the fourth Elf (with 24000 Calories), then the third Elf (with 11000 Calories), 
+# then the fifth Elf (with 10000 Calories). The sum of the Calories carried by these three elves is 45000.
+
+# Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?
 import html
 
 inputFile = 'Day1.dat'
 
-with open('./inputs/' + inputFile,'r') as f:
-    data = max([sum([int(i) for i in d.split('\n')]) for d in f.read().split('\n\n')])
-    print(data) # 66306
+def partOne(f):
+    return max([sum([int(i) for i in d.split('\n')]) for d in f.split('\n\n')])
+
+def partTwo(f):
+    d = [sum([int(i) for i in d.split('\n')]) for d in f.split('\n\n')]
+    d.sort(reverse=True)
+    return sum(d[:3])
+
+def main():
+    with open('./inputs/' + inputFile,'r') as f:
+        f = f.read()
+        print(partOne(f)) # 66306
+        print(partTwo(f)) # 195292
+
+
+if __name__=="__main__":
+    main()
